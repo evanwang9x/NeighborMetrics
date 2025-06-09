@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
+import {Navbar} from '../components/navbar.tsx';
+interface Filter {
+  id: string;
+  label: string;
+}
 
-function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedFilters, setSelectedFilters] = useState([]);
+const App: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-  const filters = [
-    { id: 'safety', label: 'Safety', icon: '🛡️' },
-    { id: 'cost', label: 'Cost of Living', icon: '💰' },
-    { id: 'weather', label: 'Weather', icon: '🌤️' },
-    { id: 'transportation', label: 'Transportation', icon: '🚌' },
-    { id: 'education', label: 'Education', icon: '🎓' },
-    { id: 'housing', label: 'Housing', icon: '🏠' }
+  const filters: Filter[] = [
+    { id: 'safety', label: 'Safety'},
+    { id: 'cost', label: 'Cost of Living'},
+    { id: 'weather', label: 'Weather'},
+    { id: 'transportation', label: 'Transportation'},
+    { id: 'education', label: 'Education'},
+    { id: 'housing', label: 'Housing'}
   ];
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     console.log('Searching for:', searchTerm);
     // TODO: Implement search logic
   };
 
-  const toggleFilter = (filterId) => {
+  const toggleFilter = (filterId: string): void => {
     setSelectedFilters(prev => 
       prev.includes(filterId) 
         ? prev.filter(id => id !== filterId)
@@ -27,7 +32,19 @@ function App() {
     );
   };
 
-  const styles = {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleButtonMouseEnter = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    (e.target as HTMLButtonElement).style.transform = 'translateY(-2px)';
+  };
+
+  const handleButtonMouseLeave = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    (e.target as HTMLButtonElement).style.transform = 'translateY(0)';
+  };
+
+  const styles: { [key: string]: React.CSSProperties } = {
     container: {
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -35,7 +52,7 @@ function App() {
     },
     header: {
       textAlign: 'center',
-      padding: '60px 20px 40px',
+      padding: '120px 20px 40px',
       color: 'white'
     },
     title: {
@@ -154,6 +171,8 @@ function App() {
 
   return (
     <div style={styles.container}>
+      <Navbar />
+      
       <header style={styles.header}>
         <h1 style={styles.title}>Smart City Data Aggregator</h1>
         <p style={styles.subtitle}>
@@ -169,14 +188,14 @@ function App() {
               type="text"
               placeholder="Enter city name (e.g., San Francisco, CA)"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleInputChange}
               style={styles.searchInput}
             />
             <button 
               type="submit" 
               style={styles.searchButton}
-              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+              onMouseEnter={handleButtonMouseEnter}
+              onMouseLeave={handleButtonMouseLeave}
             >
               Get Livability Score
             </button>
@@ -185,7 +204,7 @@ function App() {
           <div>
             <h3 style={styles.filtersTitle}>Prioritize what matters to you:</h3>
             <div style={styles.filtersGrid}>
-              {filters.map(filter => (
+              {filters.map((filter: Filter) => (
                 <div
                   key={filter.id}
                   style={{
@@ -237,6 +256,6 @@ function App() {
       </footer>
     </div>
   );
-}
+};
 
 export default App;

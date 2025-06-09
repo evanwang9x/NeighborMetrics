@@ -1,5 +1,5 @@
-# Project Name
-Neighbor Metric is a comprehensive web application that helps people make informed decisions when relocating by providing detailed livability scores and comparisons for cities and neighborhoods across multiple key factors including safety, housing costs, transportation, education, and quality of life metrics.
+# Neighbor Metric
+A comprehensive web application that helps people make informed decisions when relocating by providing detailed livability scores and comparisons for cities and neighborhoods across multiple key factors including safety, housing costs, transportation, education, and quality of life metrics.
 ## Timeframe
 [Duration] ([June 2025] - [August 2025])
 
