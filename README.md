@@ -122,4 +122,4 @@ TBD
 
 ## 📞 Contact
 Evan Wang - https://www.linkedin.com/in/evan-wang-938b73274/
-Satwik Kapavarapu - TBD
+Satwik Kapavarapu - www.linkedin.com/in/raghavsatwikkapavarapu
